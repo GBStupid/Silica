@@ -7,6 +7,8 @@ import (
 	"silica/internal/client"
 	"silica/internal/config"
 	"syscall"
+
+	"github.com/bwmarrin/discordgo"
 )
 
 func main() {
@@ -20,12 +22,15 @@ func main() {
 		panic(err)
 	}
 
+	client.GetSession().AddHandler(func (s *discordgo.Session, r *discordgo.Ready) {
+		log.Println("Silica is ready")
+	})
+
 	if err := client.GetSession().Open(); err != nil {
 		panic(err)
 	}
 
 	sc := make(chan os.Signal, 1)
 	signal.Notify(sc, syscall.SIGINT, syscall.SIGTERM)
-	log.Println("Silica is running")
 	<-sc
 }

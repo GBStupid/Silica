@@ -1,11 +1,12 @@
 package types
 
-import ( 
-  "silica/internal/config"
-  "github.com/bwmarrin/discordgo"
+import (
+	"silica/internal/config"
+
+	"github.com/bwmarrin/discordgo"
 )
 
-type Bot interface {
+type Client interface {
   GetConfig() *config.Config
   GetSession() *discordgo.Session
 }
