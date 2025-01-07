@@ -9,7 +9,7 @@ import (
 )
 
 var (
-	GuildID = flag.String("guild", "1326025141293154314", "Guild ID")
+	GuildID = flag.String("guild", "1257611555198074922", "Guild ID")
 )
 
 type Bot struct {

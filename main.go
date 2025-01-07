@@ -31,8 +31,10 @@ func main() {
 		panic(err)
 	}
 
+  log.Println("Deleting commands")
+  commands.DeleteSlash(client)
 	log.Println("Registering commands")
-	commands.RegisterSlash(client)
+	go commands.RegisterSlash(client)
 
 	sc := make(chan os.Signal, 1)
 	signal.Notify(sc, syscall.SIGINT, syscall.SIGTERM)
