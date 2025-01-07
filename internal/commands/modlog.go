@@ -1,9 +1,24 @@
 package commands
 
 import (
-	"silica/internal/types"
+	"log"
 
 	"github.com/bwmarrin/discordgo"
 )
 
-func ModLog(b types.Client, s *discordgo.Session, i *discordgo.InteractionCreate) {}
+func ModLog(s *discordgo.Session, i *discordgo.InteractionCreate) {
+	channelID := i.ChannelID
+
+	_, err := s.ThreadStart(channelID, "New Thread", discordgo.ChannelTypeGuildPublicThread, 60)
+	if err != nil {
+		log.Fatalf("Failed to create thread: %v", err)
+		return
+	}
+
+	s.InteractionRespond(i.Interaction, &discordgo.InteractionResponse{
+		Type: discordgo.InteractionResponseChannelMessageWithSource,
+		Data: &discordgo.InteractionResponseData{
+			Content: "Thread created",
+		},
+	})
+}
