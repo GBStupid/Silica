@@ -5,6 +5,7 @@ import (
 	"os"
 	"os/signal"
 	"silica/internal/client"
+	"silica/internal/commands"
 	"silica/internal/config"
 	"syscall"
 
@@ -22,13 +23,16 @@ func main() {
 		panic(err)
 	}
 
-	client.GetSession().AddHandler(func (s *discordgo.Session, r *discordgo.Ready) {
+	client.GetSession().AddHandler(func(s *discordgo.Session, r *discordgo.Ready) {
 		log.Println("Silica is ready")
 	})
 
 	if err := client.GetSession().Open(); err != nil {
 		panic(err)
 	}
+
+	log.Println("Registering commands")
+	commands.RegisterSlash(client)
 
 	sc := make(chan os.Signal, 1)
 	signal.Notify(sc, syscall.SIGINT, syscall.SIGTERM)

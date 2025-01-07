@@ -7,6 +7,6 @@ import (
 )
 
 type Client interface {
-  GetConfig() *config.Config
-  GetSession() *discordgo.Session
+	GetConfig() *config.Config
+	GetSession() *discordgo.Session
 }

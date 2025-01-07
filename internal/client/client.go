@@ -1,9 +1,15 @@
 package client
 
 import (
+	"flag"
+
 	"github.com/bwmarrin/discordgo"
 
 	"silica/internal/config"
+)
+
+var (
+	GuildID = flag.String("guild", "1326025141293154314", "Guild ID")
 )
 
 type Bot struct {
