@@ -9,10 +9,9 @@ import (
 
 func RegisterSlash(b types.Client) {
 	s := b.GetSession()
-	gid := b.GetConfig().Guilds[0]
 	registeredCommands := make([]*discordgo.ApplicationCommand, len(commands))
 	for i, v := range commands {
-		cmd, err := s.ApplicationCommandCreate(s.State.User.ID, gid, v)
+		cmd, err := s.ApplicationCommandCreate(s.State.User.ID, "", v);
 		if err != nil {
 			log.Panicf("Cannot create '%v' command: %v", v.Name, err)
 		}
