@@ -3,8 +3,6 @@ package main
 import (
 	"silica/internal/client"
 	"silica/internal/config"
-
-	"github.com/bwmarrin/discordgo"
 )
 
 func main() {
