@@ -1,8 +1,12 @@
 package main
 
 import (
+	"log"
+	"os"
+	"os/signal"
 	"silica/internal/client"
 	"silica/internal/config"
+	"syscall"
 )
 
 func main() {
@@ -16,5 +20,12 @@ func main() {
 		panic(err)
 	}
 
-	client.GetSession().Open()
+	if err := client.GetSession().Open(); err != nil {
+		panic(err)
+	}
+
+	sc := make(chan os.Signal, 1)
+	signal.Notify(sc, syscall.SIGINT, syscall.SIGTERM)
+	log.Println("Silica is running")
+	<-sc
 }
