@@ -1,5 +1,4 @@
-
-
 config.yml
 go.sum
-
+silica.exe
+vendor/
